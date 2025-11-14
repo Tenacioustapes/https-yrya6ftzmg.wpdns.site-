@@ -1,0 +1,1789 @@
+================================================================================
+GITHUB ISSUES - FORMATTED EXPORT
+================================================================================
+Repository: Tenacioustapes/https-yrya6ftzmg.wpdns.site-
+Date: 2025-11-14 16:53:27
+Total Issues: 30
+
+Summary by Priority:
+  P0: 8 issues
+  P1: 21 issues
+  P2: 1 issues
+
+================================================================================
+
+================================================================================
+Issue #1: Site not mobile friendly
+================================================================================
+Priority: P0
+Status: OPEN
+Labels: bug, team-developer, ui/ux
+Assignees: Unassigned
+Created: 2025-11-13
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/1
+
+Description:
+--------------------------------------------------------------------------------
+<table border="1" cellpadding="6" cellspacing="0">
+  <tr><th>Area</th><th>Concern</th><th>Example / Notes</th></tr>
+  <tr><td>General Notes</td><td>Not mobile phone Friendly</td><td>Will this happen when LIVE?</td></tr>
+</table>
+
+
+================================================================================
+Issue #11: Product M543 Appears in Application Guide but Not in Global Search
+================================================================================
+Priority: P0
+Status: OPEN
+Labels: bug, team-developer, Jordan FB, area-search, area-product-page
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/11
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Product Appears in Application Guide but Does NOT Appear in Global Search Results
+
+## What's happening
+
+When viewing the Application Guide, the product **M543 – DS General Purpose Tissue** appears correctly in the list.
+
+Clicking it from the Application Guide takes you to the correct product page.
+
+**BUT** when searching for "M543" (or the product name) in the global site search, the product does not appear at all.
+
+Instead, only pages like Application Guide and Home appear.
+
+## Why this is a problem
+
+- The product is published and publicly accessible, so it should exist in the search index.
+- Customers searching by product code will not find it.
+- Inconsistent behaviour:
+  - → Appears in Application Guide
+  - → Does NOT appear in global search
+
+This suggests the product is being:
+- Excluded from search queries
+- OR Not indexed by the search engine
+- OR Missing searchable custom fields (SKU field not mapped)
+- OR Search is misconfigured to only return WooCommerce products of a specific type/category
+
+## Expected behaviour
+
+- The product should appear when searching M543, its SKU, or its product name.
+- Search results should always include all published products.
+
+## Details
+
+**Area:** Search  
+**Concern:** Product appears in Application Guide but does not appear in global search results.
+
+**Example:**
+- Product M543 shows correctly in the Application Guide and links to its product page.
+- However, searching "M543" in the global search returns only pages (Application Guide, Home).
+- Product does not appear as a search result despite being published.
+- Expected: Product should appear in global search results for SKU, product code, or name.
+
+**Assigned to:** Jordan FB
+
+## Screenshots
+
+**Screenshot 1: Product in Application Guide**
+![Product in Application Guide](https://i.imgur.com/BOPdTBp.png)
+
+**Screenshot 2: Product page accessible from Application Guide**
+![Product page](https://i.imgur.com/iJRlMV8.png)
+
+... (truncated)
+
+
+================================================================================
+Issue #14: Valid Product Images Intermittently Fail to Upload (Server Load?)
+================================================================================
+Priority: P0
+Status: OPEN
+Labels: bug, team-developer, Jordan FB, backend, uploads
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/14
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Valid Product Images Intermittently Fail to Upload (Server Load?)
+
+## Summary
+
+When uploading a **1024 × 1024 PNG** image, the system sometimes shows:
+
+> "The server cannot process the image. This can happen if the server is busy or does not have enough resources to complete the task. Uploading a smaller image may help. Suggested maximum size is 2560 pixels."
+
+This should **not** happen, as the image is well under the stated 2560px limit.
+
+## Behaviour
+
+- **Image:** `t710tbh_new.png`
+- **Dimensions:** **1024 × 1024 px**, 96 dpi, 24-bit PNG
+- Well within normal upload limits.
+
+**Observed:**
+
+- On first upload attempt, error appears as above.
+- After refreshing the page and trying again, **the same file sometimes uploads successfully**.
+- This suggests an **intermittent server load / resource issue**, not a genuine size/dimension problem.
+- Error message always points to "maximum size 2560px", which is misleading in this case.
+
+## Expected
+
+- Valid images (e.g. 1024 × 1024 PNGs) should upload reliably without errors.
+- If the server is out of resources, the error message should clearly indicate a **server/resource issue**, not imply the image is too large.
+
+## Steps to Reproduce
+
+1. Edit a product and go to the image upload area.
+2. Upload `t710tbh_new.png` (1024 × 1024 PNG).
+3. Observe: upload sometimes fails with the "server cannot process the image" error.
+4. Refresh the page and try the **same file** again.
+5. Observe: upload may now succeed.
+
+## Suspected Cause
+
+- Intermittent **server load / resource limits**:
+  - PHP `memory_limit`, `post_max_size`, `upload_max_filesize`
+  - GD/Imagick library running out of memory or timing out
+- Error message is generic and misleading (points to size instead of server load).
+
+## Tasks
+
+- [ ] Check server error logs around the time of failed uploads.
+- [ ] Confirm PHP memory and upload limits.
+- [ ] Verify GD/Imagick configuration and any timeouts.
+- [ ] Adjust limits 
+... (truncated)
+
+
+================================================================================
+Issue #16: Search Does Not Return Products by SKU or General Terms
+================================================================================
+Priority: P0
+Status: OPEN
+Labels: bug, team-developer, Jordan FB, area-search, area-product-catalog
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/16
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Search Does Not Return Products by SKU or General Terms
+
+## Summary
+
+The global search/autocomplete does **not** return products even when:
+
+- The exact **SKU** is entered
+- The product is **published** and **in stock**
+- The product clearly exists in the WooCommerce product catalog
+
+## Example
+
+- **SKU:** T710TBH
+- **Product:** Double Sided Foamed Acrylic – Bonding Tape
+- **Search term entered:** `t710tbh`
+- **Result:** **"No results found"**
+
+Meanwhile, the product is visible in the admin product list with SKU correctly set to `T710TBH`.
+
+## Expected
+
+- Typing a product SKU (e.g. `T710TBH`) should return the matching product.
+- General product terms (e.g. part of the product name) should also return the product.
+- Search should include **WooCommerce products + their SKU fields**, not just pages/posts.
+
+## Actual
+
+- Search returns **no results** for valid SKUs.
+- Search appears to only return certain pages (e.g. Application Guide, Home) and ignores products.
+- This affects both autocomplete dropdown and full search results.
+
+## Possible Causes (for developer)
+
+- Search is configured to index **pages only**, not products.
+- The SKU field is not included in the searchable fields.
+- The search plugin (or theme search override) may be excluding product post type.
+- Search index needs rebuilding after migration/import.
+
+## Tasks
+
+- [ ] Confirm which post types are being searched (pages vs products).
+- [ ] Ensure WooCommerce products are included in search results.
+- [ ] Include SKU field in search index so users can search by product code.
+- [ ] Rebuild/refresh search index if required.
+- [ ] Test multiple products (including T710TBH) to confirm SKUs and names return results as expected.
+
+## Details
+
+**Area:** Global Search  
+**Concern:** Search does not return products when searching by SKU or product name.
+
+**Example:**
+- Product "Double Sided Foamed Acrylic – Bonding Tape" has SKU **T710TBH** and is publi
+... (truncated)
+
+
+================================================================================
+Issue #21: Tapes By Applications Page - 8 Tiles Return 404 Errors, 1 Shows Wrong Content
+================================================================================
+Priority: P0
+Status: OPEN
+Labels: bug, team-developer, backend, area-product-catalog, navigation
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/21
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Critical Issue: "Tapes By Applications" Page - 8 Tiles Return 404, 1 Shows Wrong Content
+
+## Summary
+
+Comprehensive user testing of all 12 application tiles on the "Tapes By Applications" page revealed **83% failure rate** (10 out of 12 tiles broken).
+
+## Test Results
+
+### ✅ **Working Correctly (2 tiles):**
+
+1. **Electrical** → Works correctly, shows electrical products (P801, U7110, CT955, U7440)
+2. **Packaging & Strapping** → Works correctly, shows packaging products (A519, P743, S1453LT, A537)
+
+### ❌ **Critical - 404 Page Not Found Errors (8 tiles):**
+
+1. **Protection & Masking** → 404 error
+2. **Single Sided Joining, Sealing & Repair** → 404 error
+3. **Printing, Display & Graphics** → 404 error
+4. **Flooring, Exhibition & Staging** → 404 error
+5. **Double Sided Joining, Splicing & Laminating** → 404 error
+6. **Agriculture & Horticulture** → 404 error
+7. **Auto & Marine** → 404 error
+8. **Mining, Resources & Utilities** → 404 error
+
+### ⚠️ **Critical - Wrong Content (1 tile):**
+
+9. **Construction & Thermal Insulation** → Page loads but displays anti-slip tape products instead of construction/thermal insulation products
+
+### 🔗 **Broken Navigation (1 tile):**
+
+10. **Safety and Anti-slip** → Links to an anchor (#) on the same page, doesn't navigate anywhere
+
+## Overall Statistics
+
+- **Working:** 2 out of 12 (17%)
+- **Broken:** 10 out of 12 (83%)
+
+## Root Cause Analysis
+
+This is a significant navigation issue that suggests:
+
+1. **Product tag URLs are missing/unpublished** - The WooCommerce product tags for these applications may not be properly configured or published
+2. **Taxonomy configuration issue** - The WooCommerce taxonomy (product tags/categories) hasn't been properly set up for these application areas
+3. **URL structure mismatch** - The links on the "Tapes By Applications" page may be pointing to incorrect URL structures
+4. **Content assignment error** - Construction & Thermal Insulation tile is showing wrong p
+... (truncated)
+
+
+================================================================================
+Issue #22: Homepage Link Testing - Application Category Tiles Show Same 404 Errors
+================================================================================
+Priority: P0
+Status: OPEN
+Labels: bug, team-developer, area-product-catalog, navigation
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/22
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Homepage Link Testing - Application Category Tiles Show Same 404 Errors
+
+## Summary
+
+Comprehensive link testing of the Tenacious Tapes homepage reveals that **application category tiles on the homepage** link to the same broken product tag URLs found on the "Tapes By Applications" page (Issue #21). This confirms the problem is site-wide, not isolated to one page.
+
+## Test Results
+
+### ✅ **WORKING LINKS (Verified):**
+
+#### Header Navigation (7/7 - 100% success):
+1. ✓ **Adhesive Tapes** → `/adhesive-tapes-range/` (Works)
+2. ✓ **Tapes By Application** → `/tapes-by-application/` (Works)
+3. ✓ **Application Guide** → `/application-guide/` (Works)
+4. ✓ **Resources** → `/resources/` (Works)
+5. ✓ **About Us** → `/about-us/` (Works)
+6. ✓ **Contact Us** → `/contact-us/` (Works)
+7. ✓ **Phone Link** → `+61 (0)3 9580 5573` (Works)
+
+### ❌ **BROKEN LINKS ON HOMEPAGE:**
+
+#### Application Category Tiles (9/12 broken - 75% failure rate):
+
+1. ❌ **Protection & Masking** → `/product-tag/protection-and-masking-tapes/` (404 error)
+2. ❌ **SS Joining, Sealing & Repair** → `/product-tag/single-sided-joining-sealing-repair-tapes/` (404 error)
+3. ❌ **Printing, Display & Graphics** → `/product-tag/printing-display-graphics-tapes/` (404 error)
+4. ❌ **Flooring, Exhibition & Staging** → `/product-tag/flooring-exhibition-staging-tapes/` (404 error)
+5. ✓ **Electrical** → `/product-tag/electrical/` (Works - verified)
+6. ⚠️ **Construction & Thermal Insulation** → `/product-tag/construction-thermal-insulation/` (Shows wrong products - anti-slip instead of construction)
+7. ✓ **Packaging & Strapping** → `/product-tag/packaging-strapping/` (Works - verified)
+8. ❌ **DS Joining, Splicing & Laminating** → `/product-tag/double-sided-joining-splicing-laminating-tapes/` (404 error)
+9. ⚠️ **Safety and Anti Slip** → `/product-tag/safety-ohs-tapes/` (Broken anchor link - doesn't navigate)
+10. ❌ **Agriculture & Horticulture** → `/product-tag/agriculture-and-horticulture-tap
+... (truncated)
+
+
+================================================================================
+Issue #25: Contact Form Not Working - Submission Fails
+================================================================================
+Priority: P0
+Status: OPEN
+Labels: bug, team-developer, backend
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/25
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Contact Form Not Working - Submission Fails
+
+## Summary
+
+The contact form on the Contact Us page (`/contact-us/`) is **not functioning**. When attempting to submit the form with valid data, it displays an error message: **"Failed to send your message. Please try later or contact the administrator by another method."**
+
+## Test Results
+
+### Form Submission Test:
+- **Test Date:** November 2025
+- **Page:** https://yrya6ftzmg.wpdns.site/contact-us/
+- **Form Fields Tested:**
+  - Name: "Test User" ✓
+  - Email: "test@example.com" ✓
+  - Subject: "Test Contact Form Submission" ✓
+  - Message: "This is a test message to verify the contact form is working correctly." ✓
+
+### Result:
+- ❌ **Form submission FAILED**
+- **Error Message:** "Failed to send your message. Please try later or contact the administrator by another method."
+- **Form Status:** Form fields remain filled (form does not clear)
+- **No Success Message:** No confirmation that message was received
+
+## Impact
+
+- **Critical Functionality Broken:** Users cannot contact the business through the website
+- **Lost Leads:** Potential customers cannot submit inquiries
+- **User Experience:** Frustrating experience - users fill out form but it doesn't work
+- **Business Impact:** Direct impact on lead generation and customer inquiries
+- **Trust Issues:** Broken contact form reduces credibility
+
+## Expected Behavior
+
+The contact form should:
+- Accept valid form submissions
+- Send emails to: `customerservice@tenacioustapes.com.au`
+- Display a success message after submission
+- Clear form fields after successful submission
+- Store form submissions (if applicable)
+
+## Possible Root Causes
+
+1. **Email Configuration Issue:**
+   - SMTP server not configured
+   - Email service not set up
+   - Wrong email recipient address
+   - Email sending permissions/authentication issues
+
+2. **WordPress Contact Form Plugin Issue:**
+   - Contact Form 7 (or similar) plugin misconfigured
+   -
+... (truncated)
+
+
+================================================================================
+Issue #35: Critical Performance - 75 Blocking Scripts and 47 Blocking Stylesheets
+================================================================================
+Priority: P0
+Status: OPEN
+Labels: bug, team-developer, backend
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/35
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Critical Performance - 75 Blocking Scripts and 47 Blocking Stylesheets
+
+## Summary
+
+The homepage has **75 render-blocking scripts** and **47 render-blocking stylesheets**, causing significant performance degradation. This directly impacts Core Web Vitals (LCP, FID/INP, CLS) and user experience.
+
+## Performance Metrics (Homepage)
+
+**Resource Count:**
+- **Scripts:** 111 total (75 blocking, 36 non-blocking)
+- **Stylesheets:** 47 (all blocking)
+- **Images:** 57
+- **Inline Styles:** 13
+
+**Page Load:**
+- Total Load Time: ~985ms
+- DOM Content Loaded: ~925ms
+- First Paint: Not captured (likely > 1s)
+- First Contentful Paint: Not captured
+
+## Problem
+
+### Render-Blocking Resources:
+1. **75 Blocking Scripts** - No `async` or `defer` attributes
+2. **47 Blocking Stylesheets** - All stylesheets block rendering
+3. **No Resource Hints** - Missing `preload`, `prefetch`, `dns-prefetch`
+4. **No Script Optimization** - Scripts loaded synchronously
+
+### Impact:
+- **LCP (Largest Contentful Paint):** Delayed by blocking resources
+- **FID/INP (Interaction):** Scripts block main thread
+- **CLS (Cumulative Layout Shift):** Stylesheets cause layout shifts
+- **TBT (Total Blocking Time):** High due to blocking scripts
+- **User Experience:** Slow page load, poor mobile performance
+- **SEO:** Google penalizes slow-loading sites
+
+## Expected Behavior
+
+- Critical CSS should be inlined
+- Non-critical CSS should be deferred or loaded asynchronously
+- Scripts should use `async` or `defer` where appropriate
+- Resource hints should be implemented for critical resources
+- Images should be lazy-loaded
+- Scripts and stylesheets should be minified and combined
+
+## Tasks
+
+- [ ] Audit all 111 scripts - identify critical vs non-critical
+- [ ] Add `async` or `defer` to non-critical scripts
+- [ ] Inline critical CSS
+- [ ] Defer non-critical stylesheets
+- [ ] Implement resource hints (`preload`, `prefetch`)
+- [ ] Minify and combine CSS files
+- [ ] M
+... (truncated)
+
+
+================================================================================
+Issue #4: Default Sorting to be Alphabetical in All Areas
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: enhancement, team-developer, ui/ux
+Assignees: Unassigned
+Created: 2025-11-13
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/4
+
+Description:
+--------------------------------------------------------------------------------
+## Issue: Default Sorting - General
+
+**Area:** General Notes  
+**Concern:** Default Sorting to be alphabetical in all areas
+
+**Description:**
+Default sorting should be alphabetical in all areas of the website.
+
+
+================================================================================
+Issue #5: Default Sorting - Products Not Alphabetical on Adhesive Tapes Range Page
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: enhancement, team-developer, ui/ux
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/5
+
+Description:
+--------------------------------------------------------------------------------
+## Issue: Default Sorting - Adhesive Tapes Range
+
+**Area:** Adhesive Tapes Range - main page  
+**Concern:** Default sorting - Products aren't listed as alphabetical
+
+**Description:**
+On the Adhesive Tapes Range main page, products are not listed in alphabetical order by default. They should be sorted alphabetically.
+
+
+================================================================================
+Issue #7: Side Navigation - Product Applications List Format
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: enhancement, team-developer, ui/ux
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/7
+
+Description:
+--------------------------------------------------------------------------------
+## Issue: Side Navigation - Product Applications List
+
+**Area:** Side navigation  
+**Concern:** Product applications should be listed as:
+
+**Required Product Applications List:**
+- Agriculture & Horticulture
+- Auto & Marine
+- Construction & Thermal Insulation
+- DS Joining, Splicing & Laminating
+- Electrical
+- Flooring, Exhibition & Staging
+- Mining, Resources & Utilities
+- Packaging & Strapping
+- Printing, Display & Graphics
+- Protection and Masking
+- Safety and Anti-slip
+- SS joining, Sealing & repair
+
+**Description:**
+The side navigation Product Applications section should display the above list of product applications in this specific order and naming.
+
+
+================================================================================
+Issue #8: Color Selection Widget Alignment Issue
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: bug, team-developer, ui/ux, Jordan FB
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/8
+
+Description:
+--------------------------------------------------------------------------------
+## Issue: Color Selection Widget Alignment
+
+**Area:** Product Page - Color Selection  
+**Concern:** Alignment issue where "Color:" label and the color variable/value are not properly aligned (dropped down)
+
+**Description:**
+On product pages, the Color selection widget has an alignment issue. The "COLOR :" label and the color value (e.g., "GREEN") are not properly aligned - the color value appears to be dropped down or misaligned vertically.
+
+**Example:**
+The color selection shows "COLOR : GREEN" but the alignment between the label and the value is incorrect.
+
+**Screenshot:**
+
+![Color Alignment Issue](https://i.imgur.com/qJZ2Wpe.png)
+
+**Assigned to:** Jordan FB
+
+
+================================================================================
+Issue #9: Search Result Shows Unintended '(Product)' Text
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: bug, team-developer, ui/ux, Jordan FB
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/9
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Search Result Shows Strange "(Product)" Text Under Listing
+
+## What's happening
+
+When searching for a product (e.g., "PT159"), the autocomplete search dropdown displays a strange line of text:
+
+```
+(Product)
+```
+
+This appears under the product description and looks like:
+- A leftover taxonomy label
+- A debug field
+- An internal post type
+- Or a misconfigured Elementor/WooCommerce meta field
+
+This text is **not intended for customers** and looks unprofessional.
+
+## Why it's an issue
+
+- Confuses users because it provides no value
+- The formatting is inconsistent with the rest of the UI
+- Likely exposing internal post type slug or taxonomy name
+- Reduces trust in the search feature
+
+## Expected behaviour
+
+Autocomplete results should only show:
+- Product image
+- Product title
+- Short description (if needed)
+
+There should be **no internal labels** or metadata visible.
+
+## Details
+
+**Area:** Search / Autocomplete  
+**Concern:** Autocomplete result displays unintended "(Product)" text.
+
+**Example:**
+- When searching for "PT159", the dropdown shows a line "(Product)" beneath the description.
+- This appears to be internal metadata (post type, taxonomy, or template leftover).
+- Should not be visible to users.
+- Expected: Only product image, title, and description in results.
+
+**Assigned to:** Jordan FB
+
+## Screenshot
+
+![Search Result Showing (Product) Text](https://i.imgur.com/FNtSyiQ.png)
+
+
+================================================================================
+Issue #12: Bullet Point Text Alignment Incorrect in Features Section
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: bug, team-developer, ui/ux, Jordan FB, frontend, css
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/12
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Bullet Point Text Alignment Incorrect in Features Section
+
+## Summary
+
+Bullet points in the Features section are rendering with incorrect indentation.
+
+The second line of wrapped text is misaligned, starting under the bullet icon instead of beneath the first word.
+
+## What's happening
+
+- Multi-line bullet points are indented inconsistently.
+- The second line of each bullet appears too far left.
+- This causes the text to misalign vertically and makes the list difficult to read.
+
+## Expected behaviour
+
+- Wrapped lines should align directly under the first word of the bullet point text (standard HTML list formatting).
+- The bullet icon should not affect indentation.
+- CSS should apply proper list-style-position and padding so indentation is consistent.
+
+## Visual Reference
+
+**Actual (incorrect):**
+- Second line sits under the bullet icon
+- Uneven alignment across bullets
+
+**Expected (correct):**
+- Second line aligns under the first text word, not the bullet
+- Clean and readable structure
+
+## Possible cause
+
+CSS override on:
+- `ul li::marker`
+- `padding-left`
+- `text-indent`
+- `list-style-position: inside` (likely incorrect)
+- Theme or WooCommerce product template altering default list indentation.
+
+## Details
+
+**Area:** Styling – Product Page  
+**Concern:** Bullet point alignment is incorrect for multi-line items.
+
+**Example:**
+- In the Features list, wrapped text lines start beneath the bullet icon instead of beneath the first text word.
+- This creates uneven indentation across all list items.
+- Expected: Wrapped lines align directly under the first word, following standard HTML list formatting.
+- Likely caused by CSS on `ul li` or `list-style-position`.
+
+**Assigned to:** Jordan FB
+
+## Screenshot
+
+![Bullet Point Alignment Issue](https://i.imgur.com/zkxwlLS.png)
+
+
+================================================================================
+Issue #13: Recently Viewed Widget Showing Incorrect/Unexpected Behaviour
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: bug, team-developer, ui/ux, Jordan FB, area-widgets
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/13
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: "Recently Viewed" Widget Showing Incorrect/Unexpected Behaviour (Sidebar + Pricing)
+
+## Summary
+
+The Recently Viewed feature displays inconsistently across the site.
+
+Some elements appear to be unintended, and others are showing incorrect information (such as pricing).
+
+This issue consolidates all known problems.
+
+## ✅ Sub-Issues / Tasks
+
+### 1. Sidebar Recently Viewed – Possibly Unintended
+
+- Confirm whether the left sidebar Recently Viewed widget is part of the intended design
+- If NOT intended: Remove the sidebar widget entirely
+- If it is intended: update it to match header behaviour (see below)
+
+### 2. Sidebar Spelling Error
+
+- Fix typo in sidebar heading:
+  - "RENCENTLY VIEWED" → "RECENTLY VIEWED"
+- (This becomes irrelevant if the sidebar is removed.)
+
+### 3. Pricing Should Not Display Anywhere
+
+- Remove pricing from sidebar Recently Viewed
+- Ensure pricing is removed globally from all Recently Viewed widgets
+- Confirm default behaviour = no price shown for any product in any Recently Viewed component
+
+### 4. Product List Mismatch (Header vs Sidebar vs Category Sidebar)
+
+- Sidebar Recently Viewed shows products A + B
+- Header Recently Viewed shows different items
+- Category-menu Recently Viewed (left side of product category pages) shows nothing
+- Unify the data source so all intended Recently Viewed components use the same list (or remove the extras)
+
+### 5. Left-Menu Category Recently Viewed – Should It Exist?
+
+- Confirm whether Recently Viewed is intended to appear in category side menus at all
+- If NOT intended → remove from category side menus
+- If intended → connect to the correct data source used by the header widget
+
+## 🔍 Examples Observed
+
+- PVDF Membrane Butyl Tape appears in sidebar Recently Viewed with price
+- PT159 Chromakey Cloth Matt Tape also shows in sidebar with price
+- These same items do not appear in category sidebar Recently Viewed
+- But appear in the header dropdown Recently View
+... (truncated)
+
+
+================================================================================
+Issue #15: Popular Products Block Still Showing on Category Parent Pages
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: bug, team-developer, ui/ux, Jordan FB, area-category-pages
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/15
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: "Popular Products" Block Still Showing on Category Parent Pages
+
+## Summary
+
+When clicking on a **parent category menu item** (e.g. **Double Sided Tapes**), a **"Popular Products"** section appears at the top of the category page.
+
+This block shows featured products with "TOP 01 / TOP 02 / TOP 03 / TOP 04" badges.
+
+This section was expected to be **removed from the design**, but it is still displaying.
+
+## Location
+
+- Parent category pages, e.g.:
+  - `Double Sided Tapes` (and possibly other top-level tape categories)
+
+## Expected
+
+- No "Popular Products" row/section should appear at the top of parent category pages
+
+**OR**
+
+- If it must exist, it should only appear where explicitly agreed in the design (to be confirmed).
+
+## Actual
+
+- "Popular Products" block appears automatically at the top of the category content.
+- Pushes real product listing further down the page.
+- Creates confusion about whether these are curated promos vs. normal category results.
+
+## Tasks
+
+- [ ] Confirm whether "Popular Products" is meant to appear at all on category pages.
+- [ ] If **not** intended → remove this block entirely from parent category templates.
+- [ ] If only intended for specific pages → limit its display to those only.
+- [ ] Clear any leftover Elementor/WooCommerce widgets or template parts that auto-inject this section.
+
+## Details
+
+**Area:** Category Pages / Product Display  
+**Concern:** "Popular Products" block appearing on parent category pages when it should be removed.
+
+**Assigned to:** Jordan FB
+
+## Screenshot
+
+![Popular Products block on Double Sided Tapes category page](https://i.imgur.com/ou6RONZ.jpeg)
+
+
+================================================================================
+Issue #17: Sidebar Shows Incorrect Product Category Filters for Current Page
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: bug, team-developer, ui/ux, Jordan FB, area-sidebar, navigation
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/17
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Sidebar Shows Incorrect Product Category Filters for Current Page
+
+## Summary
+
+When viewing certain **single-sided tape** related pages (e.g. tag page **"SS Joining, Sealing & Repair"**), the left-hand sidebar **Product Categories** menu shows categories that don't match the user's current context.
+
+## Example
+
+- User is effectively in a **Single Sided** context
+- Sidebar still shows **Double Sided Tapes**, **Safety Tapes**, **Other Products** etc.
+- In some cases, a user can click a single-sided category but the sidebar continues to show **double-sided filters**, which is confusing.
+
+This makes it unclear which range the user is actually filtering and browsing.
+
+## Expected
+
+- Sidebar filters should match the **current range or context**.
+- If user is in a **Single Sided** context:
+  - Only relevant single-sided categories/filters should be shown.
+- Cross-range filters (e.g. Double Sided when browsing Single Sided) should not appear unless explicitly required by design.
+
+## Actual
+
+- Sidebar displays a **global product category tree** (Single Sided, Double Sided, Safety, Other Products) regardless of the user's current range/tag.
+- Users can be on a Single Sided-related page while still seeing Double Sided filters in the sidebar.
+- This creates the impression that they're filtering single-sided products, but the UI suggests multiple ranges at once.
+
+## Tasks
+
+- [ ] Confirm intended behaviour for sidebar filters on:
+  - Tag pages (e.g. "SS Joining, Sealing & Repair")
+  - Single Sided vs Double Sided vs Safety ranges
+- [ ] Update sidebar widget/template logic so that category filters:
+  - Reflect only the relevant range/context
+  - Or clearly distinguish cross-range navigation if that's desired
+- [ ] Test with several Single Sided and Double Sided pages to ensure filters always match the current page context.
+
+## Details
+
+**Area:** Sidebar – Product Categories / Filters  
+**Concern:** Sidebar shows product categories
+... (truncated)
+
+
+================================================================================
+Issue #23: Application Guide Page - Multiple Product Links Are Broken Placeholders
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: bug, team-developer, area-product-catalog, navigation
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/23
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Application Guide Page - Multiple Product Links Are Broken Placeholders
+
+## Summary
+
+The Application Guide page contains an interactive comparison table with product codes. **15-20 product codes** link to `/application-guide/#` which are broken placeholder anchor links that don't navigate to product pages. This prevents users from accessing product information from the comparison table.
+
+## Test Results
+
+### ✅ **WORKING Product Links (Sample Tested):**
+
+- ✓ **A591** → `/product/ds-crepe-tape/` - Works
+- ✓ **M543** → `/product/ds-general-purpose-tissue/` - Works (verified with full product page)
+- ✓ **M545** → `/product/ds-hd-general-purpose-tissue/` - Should work
+- ✓ **M593** → `/product/ds-tissue/` - Should work
+- ✓ **N520** → `/product/ds-premium-tissue-tape/` - Should work
+
+### ❌ **BROKEN Product Links (Placeholder "#" links):**
+
+These product codes link to `/application-guide/#` which is just an anchor that doesn't navigate anywhere:
+
+#### **Tissue Category:**
+- ❌ **M509** → `#` anchor only (confirmed broken)
+
+#### **Transfer Category:**
+- ❌ **B333** → `#`
+
+#### **Cloth Category:**
+- ❌ **S1360SE** → `#`
+
+#### **Filmic Category:**
+- ❌ **S1-200** → `#`
+- ❌ **S1397** → `#`
+- ❌ **AT320** → `#`
+- ❌ **U3525Z** → `#`
+- ❌ **U910** → `#`
+
+#### **Foam Category:**
+- ❌ **S1PFO1** → `#`
+- ❌ **FRW10** → `#`
+- ❌ **FAW30** → `#`
+- ❌ **S1822** → `#`
+- ❌ **FF164** → `#`
+
+#### **Foamed Acrylic Category:**
+- ❌ **T608BR** → `#`
+
+### **Scrim Category:**
+- (All appear to have real links - no issues found)
+
+## Statistics
+
+- **Working Links:** ~5+ verified working
+- **Broken Links:** 15+ confirmed broken (placeholder `#` links)
+- **Estimated Total Broken:** 15-20 product codes
+- **Failure Rate:** Approximately 60-75% of product links in comparison table
+
+## Root Cause
+
+Product codes in the Application Guide comparison table are linking to:
+- **Broken:** `/application-guide/#` (placeholder anchor that doesn't navigate)
+... (truncated)
+
+
+================================================================================
+Issue #24: Multiple Spelling Errors Found Across Website
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: bug, team-developer, ui/ux
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/24
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Multiple Spelling Errors Found Across Website
+
+## Summary
+
+Comprehensive review of the Tenacious Tapes website has identified **3 distinct spelling errors** appearing across multiple pages. These errors impact the professional appearance and credibility of the site.
+
+## Spelling Errors Found
+
+### 1. Homepage - "Soltutions" → "Solutions"
+
+**Error:** "Adhesive Tape **Soltutions** For Industry"
+
+- **Location:** Homepage main content section, orange heading
+- **Page:** https://yrya6ftzmg.wpdns.site/
+- **Correction:** Should be "**Solutions**"
+- **Impact:** High visibility - appears on homepage hero/main content area
+
+### 2. Application Guide Page - "Dsiplay" → "Display"
+
+**Error:** "Approved For Exhibition Floors & General **Dsiplay**"
+
+- **Location:** Application Guide page, Cloth section table
+- **Page:** https://yrya6ftzmg.wpdns.site/application-guide/
+- **Context:** In the "TYPICAL APPLICATIONS" column for product K5325
+- **Correction:** Should be "**Display**"
+- **Impact:** Medium - appears in product information table
+
+### 3. Category Dropdown Menu - "Reiforced" → "Reinforced" (Site-Wide)
+
+**Error:** "**Reiforced** Foils" and "**Reiforced**/Filament"
+
+- **Location:** "All categories" dropdown menu (appears on all pages)
+- **Pages Affected:**
+  - Homepage
+  - About Us page
+  - Contact Us page
+  - Resources page
+  - Adhesive Tapes Applications page
+  - Application Guide page
+  - All other pages with category dropdown
+- **Correction:** Should be "**Reinforced**"
+- **Impact:** **HIGH** - Appears in navigation menu across entire website, making it one of the most frequently occurring errors
+
+## Statistics
+
+- **Total unique spelling errors:** 3 distinct errors
+- **Total occurrences:** 
+  - "Soltutions" → 1 occurrence (homepage)
+  - "Dsiplay" → 1 occurrence (Application Guide)
+  - "Reiforced" → Multiple occurrences (site-wide in category dropdown)
+- **Pages affected:** Multiple (homepage, Application Guide, and
+... (truncated)
+
+
+================================================================================
+Issue #26: Product Pages Have Inconsistent Button Layout - Some Missing Product Info
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: bug, team-developer, ui/ux, area-product-page
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/26
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Product Pages Have Inconsistent Button Layout - Some Missing "Product Info"
+
+## Summary
+
+Product pages across the website have **inconsistent button layouts**. Some product pages display both "Product Info" and "Enquire" buttons, while other product pages only show "Enquire" with no "Product Info" button. This creates an inconsistent user experience.
+
+## Problem Description
+
+### Expected Behavior:
+All product pages should have a consistent layout with the same button options available.
+
+### Actual Behavior:
+- **Some product pages:** Have both "Product Info" and "Enquire" buttons
+- **Other product pages:** Only have "Enquire" button (missing "Product Info")
+
+## Impact
+
+- **Inconsistent User Experience:** Users expect the same functionality across all product pages
+- **Missing Functionality:** Some products don't have access to "Product Info" feature
+- **Confusion:** Users may wonder why some products have different options than others
+- **Professional Appearance:** Inconsistency reduces the professional look of the site
+
+## Questions to Investigate
+
+1. **Is this intentional?**
+   - Are some products meant to have "Product Info" while others aren't?
+   - Or is this a bug/inconsistency?
+
+2. **What determines which products get "Product Info"?**
+   - Product category?
+   - Product attributes?
+   - Data availability?
+   - Random/inconsistent implementation?
+
+3. **What should "Product Info" show?**
+   - Product specifications?
+   - Technical data sheets?
+   - Application information?
+   - Other product details?
+
+## Tasks
+
+- [ ] Audit all product pages to identify which have "Product Info" and which don't
+- [ ] Determine the pattern/criteria for which products have "Product Info"
+- [ ] Identify if this is intentional or a bug
+- [ ] If intentional: Document the criteria and ensure it's consistently applied
+- [ ] If bug: Fix all product pages to have consistent button layout
+- [ ] Verify "Product Info" functionality w
+... (truncated)
+
+
+================================================================================
+Issue #27: Newsletter Signup Landing Page - Redesign to Look More Like Landing Page Type
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: enhancement, team-client, ui/ux
+Assignees: Tenacioustapes
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/27
+
+Description:
+--------------------------------------------------------------------------------
+# 🎨 Issue: Newsletter Signup Landing Page - Redesign to Look More Like Landing Page Type
+
+## Summary
+
+The newsletter signup landing page needs to be redesigned to have a more professional, modern "landing page" appearance. Currently, it may look too basic or not visually appealing enough to encourage signups.
+
+## Current State
+
+The newsletter signup form appears in the footer of pages with:
+- "STAY INFORMED BY NEWSLETTER" heading
+- First Name field
+- Email Address field (required)
+- Subscribe button
+
+## Desired Outcome
+
+Transform the newsletter signup into a more engaging, conversion-focused landing page design that:
+- Looks more professional and modern
+- Has better visual appeal
+- Encourages more signups
+- Follows landing page best practices
+- Stands out from standard form layouts
+
+## Design Considerations
+
+### Visual Elements:
+- [ ] More prominent/eye-catching design
+- [ ] Better use of colors, spacing, and typography
+- [ ] Visual hierarchy that draws attention
+- [ ] Professional, modern aesthetic
+
+### User Experience:
+- [ ] Clear value proposition (why sign up?)
+- [ ] Compelling headline/copy
+- [ ] Better call-to-action
+- [ ] Mobile-responsive design
+- [ ] Easy to find and use
+
+### Landing Page Best Practices:
+- [ ] Focused, single-purpose design
+- [ ] Minimal distractions
+- [ ] Clear benefits listed
+- [ ] Trust indicators (if applicable)
+- [ ] Social proof (if applicable)
+
+## Location
+
+- **Current Location:** Footer of website pages
+- **Page:** Multiple pages (footer appears site-wide)
+- **Section:** Newsletter subscription form
+
+## Tasks
+
+- [ ] Review current newsletter signup design
+- [ ] Research landing page design best practices
+- [ ] Create new design mockup/wireframe
+- [ ] Implement new landing page-style design
+- [ ] Ensure mobile responsiveness
+- [ ] Test signup functionality with new design
+- [ ] Verify form still works correctly
+- [ ] Check across different browsers/devices
+
+## Priority
+
+
+... (truncated)
+
+
+================================================================================
+Issue #28: Missing Product Images and Empty Link Placeholders
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: bug, team-developer, area-product-catalog
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/28
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Missing Product Images and Empty Link Placeholders
+
+## Summary
+
+Multiple product pages show empty link placeholders (e.g., "【18†】", "【52†】", "【53†】") with no visible text, images, or product names. This indicates missing product data, incomplete CMS entries, or broken product links.
+
+## Problem Description
+
+### Empty Link Placeholders:
+- **Location:** "Tapes By Application" page and category pages
+- **Examples:** 
+  - "【18†】" appears twice with no content
+  - "【52†】" and "【53†】" show prices but no product names or images
+- **Impact:** Users cannot see or access these products
+
+### Blank Product Items:
+- Products listed with placeholder codes but no:
+  - Product names
+  - Product images
+  - Product descriptions
+  - Working links
+- Some show prices but are otherwise incomplete
+
+## Locations Found
+
+- Main "Tapes By Application" page
+- Category pages (Agriculture & Horticulture, Auto & Marine, etc.)
+- Product listing pages
+
+## Impact
+
+- **User Experience:** Degraded experience - users cannot discover or access products
+- **Conversion:** Missing product information prevents purchases
+- **SEO:** Search engines cannot index incomplete products
+- **Accessibility:** Missing alt text and link text
+- **Professional Appearance:** Placeholders make site look incomplete/unprofessional
+
+## Root Cause
+
+Likely causes:
+1. **Incomplete CMS/WooCommerce entries** - Products created but not fully populated
+2. **Missing product images** - Images not uploaded or links broken
+3. **Placeholder products** - Test/draft products not removed
+4. **Data import issues** - Incomplete data migration
+
+## Expected Behavior
+
+All product listings should have:
+- ✅ Product name/title
+- ✅ Product image with descriptive alt text
+- ✅ Product description
+- ✅ Working link to product page
+- ✅ Price (if applicable)
+- ✅ No placeholder codes or empty links
+
+## Tasks
+
+- [ ] Audit entire product catalogue for incomplete entries
+- [ ] Identify all pr
+... (truncated)
+
+
+================================================================================
+Issue #29: Repeated and Redundant Category Lists on Category Pages
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: bug, team-developer, ui/ux, navigation
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/29
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Repeated and Redundant Category Lists on Category Pages
+
+## Summary
+
+Category pages display the entire "Tapes By Application" navigation list multiple times - appearing below the header, in the sidebar, and again further down the page. This creates unnecessary duplication and clutters the page.
+
+## Problem Description
+
+### Navigation Duplication:
+- **Location:** Category pages (e.g., Agriculture & Horticulture, Auto & Marine)
+- **Issue:** The same "Tapes By Application" list appears:
+  1. Below the header
+  2. In sidebar navigation
+  3. Further down the page (duplicated)
+- **Also:** Main menu categories are repeated multiple times
+
+### Impact:
+- Pages become unnecessarily long
+- Same navigational options presented repeatedly
+- Dilutes focus from actual product listings
+- Confusing user experience
+- Wastes screen space
+
+## Expected Behavior
+
+Navigation should appear:
+- ✅ Once in a logical location (sidebar or header)
+- ✅ Use breadcrumbs for context instead of full category lists
+- ✅ Focus on product listings, not repeated navigation
+
+## Recommendations
+
+1. **Display category list only once:**
+   - Ideally in sidebar or dropdown menu
+   - Not repeated multiple times on same page
+
+2. **Use breadcrumbs for context:**
+   - Show parent categories via breadcrumb trail
+   - Example: Home > Adhesive Tapes > Single Sided > [Current Category]
+
+3. **Simplify navigation:**
+   - Remove redundant category lists
+   - Keep navigation in one consistent location
+
+## Tasks
+
+- [ ] Audit all category pages for navigation duplication
+- [ ] Identify where category lists are repeated
+- [ ] Remove duplicate navigation elements
+- [ ] Implement breadcrumb navigation for context
+- [ ] Ensure navigation appears only once per page
+- [ ] Test navigation still works correctly after cleanup
+- [ ] Verify page length is reduced and more focused
+
+## Priority
+
+**MEDIUM (P1)** - This is a UX/design issue that affects page clarity and user
+... (truncated)
+
+
+================================================================================
+Issue #30: Incomplete Product Names and Descriptions
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: bug, team-developer, area-product-catalog
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/30
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Incomplete Product Names and Descriptions
+
+## Summary
+
+Multiple product entries show placeholder codes (e.g., "【52†】", "【53†】") or truncated names instead of complete product information. Some products have prices but no names, or have incomplete/truncated descriptions.
+
+## Problem Description
+
+### Missing Product Names:
+- **Examples:**
+  - "【52†】" followed by "$20.49" (no product name)
+  - "【53†】 High Specification Flame Retardant Coth Tape" (missing spacing, truncated)
+- **Location:** Category pages, product listings
+
+### Generic Labels Without Detail:
+- Items like "Hook & Loop – Adhesive" and "Hook & Loop – Sew On" appear in lists
+- May not be linked to product detail pages
+- Lack complete product information
+
+### Impact:
+- **User Frustration:** Users cannot understand what products are
+- **Search Issues:** Products cannot be found via search (Issue #16 related)
+- **SEO Impact:** Search engines cannot index incomplete products
+- **Conversion:** Missing information prevents purchases
+
+## Root Cause
+
+Likely causes:
+1. **Incomplete data entry** - Products created but names/descriptions not added
+2. **Data import issues** - Product names truncated during migration
+3. **CMS field limits** - Descriptions cut off due to character limits
+4. **Placeholder products** - Draft products not properly completed
+
+## Expected Behavior
+
+All products should have:
+- ✅ Complete, descriptive product names
+- ✅ Full product descriptions (not truncated)
+- ✅ Proper spacing and formatting
+- ✅ Links to detailed product pages
+- ✅ No placeholder codes in product names
+
+## Tasks
+
+- [ ] Audit all product listings for incomplete names
+- [ ] Identify products with placeholder codes (【XX†】)
+- [ ] Find products with truncated names or descriptions
+- [ ] For each incomplete product:
+  - [ ] Add complete product name
+  - [ ] Add full product description
+  - [ ] Fix spacing and formatting issues
+  - [ ] Verify product links to detail page
+
+... (truncated)
+
+
+================================================================================
+Issue #31: Accessibility Concerns - Missing Alt Text, Heading Hierarchy, Link Text
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: bug, team-developer, ui/ux
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/31
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Accessibility Concerns - Missing Alt Text, Heading Hierarchy, Link Text
+
+## Summary
+
+The website has multiple accessibility issues including missing alt text for images, improper heading hierarchy, and links with generic or blank text. These issues prevent screen readers from properly conveying information and reduce accessibility compliance.
+
+## Problem Description
+
+### Missing Alt Text:
+- **Issue:** Empty anchor tags indicate missing alt text for product images
+- **Impact:** Screen readers cannot describe images to visually impaired users
+- **Location:** Product listings, category pages
+
+### Heading Hierarchy Issues:
+- **Issue:** Pages display repeated "###### Main Menu" headings (H6 level)
+- **Problem:** Headings don't follow logical order (should be H1 for page titles, H2 for main sections)
+- **Impact:** Screen readers and assistive technologies cannot navigate pages effectively
+
+### Link Text Clarity:
+- **Issue:** Several links use generic labels or blank anchors
+- **Examples:** Empty anchor tags, placeholder codes as link text
+- **Impact:** Screen readers cannot convey link purpose
+
+## Accessibility Standards
+
+Should comply with:
+- **WCAG 2.1** (Web Content Accessibility Guidelines)
+- **WCAG Level AA** (recommended minimum)
+- **ADA Compliance** (if applicable)
+
+## Impact
+
+- **Legal Risk:** Non-compliance with accessibility standards
+- **User Exclusion:** Visually impaired users cannot use the site
+- **SEO Impact:** Search engines use alt text and structure for indexing
+- **Professional Standards:** Accessibility is a professional requirement
+
+## Expected Behavior
+
+### Alt Text:
+- ✅ All images have descriptive alt text
+- ✅ Alt text describes image content and purpose
+- ✅ Decorative images have empty alt="" attribute
+
+### Heading Hierarchy:
+- ✅ H1 for page title (one per page)
+- ✅ H2 for main sections
+- ✅ H3-H6 for subsections in logical order
+- ✅ No skipping heading levels
+
+### Link Text:
+- ✅ All lin
+... (truncated)
+
+
+================================================================================
+Issue #32: Usability and Performance Improvements - Filters, Meta Tags, Responsive Design
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: enhancement, team-developer, ui/ux
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/32
+
+Description:
+--------------------------------------------------------------------------------
+# 🎨 Issue: Usability and Performance Improvements Needed
+
+## Summary
+
+Category pages are very long with unfiltered product lists, making it difficult for users to find products. Additionally, meta titles and descriptions appear generic across pages, and responsive design needs verification.
+
+## Problem Description
+
+### Long Unfiltered Category Pages:
+- **Issue:** Category pages list extensive products without filters
+- **Impact:** 
+  - Users overwhelmed by too many options
+  - Difficult to find specific products
+  - Potential performance slowdown with many products
+  - Poor user experience
+
+### Generic Meta Tags:
+- **Issue:** All pages appear to have same generic title: "Tenacious Tapes – Adhesive Tapes Supplier"
+- **Impact:**
+  - Poor SEO - search engines can't differentiate pages
+  - Users can't distinguish pages in browser tabs
+  - Reduced click-through rates from search results
+
+### Responsive Design:
+- **Issue:** Not fully testable via text-only view, but needs verification
+- **Impact:**
+  - Mobile usability is crucial for ecommerce
+  - May have issues on different screen sizes
+  - Related to Issue #1 (Site not mobile friendly)
+
+## Recommendations
+
+### 1. Implement Faceted Search/Filters:
+- Add filters by:
+  - Tape type
+  - Width
+  - Color
+  - Application
+  - Price range
+- Allow users to narrow down products quickly
+- Improve findability
+
+### 2. Responsive Design Audit:
+- Test on multiple devices:
+  - Mobile phones (various sizes)
+  - Tablets
+  - Desktop (various resolutions)
+- Verify menus and product grids adapt properly
+- Fix any responsive issues found
+
+### 3. Unique Meta Tags:
+- Create unique meta titles for:
+  - Each main category page
+  - Each product page
+  - Each application page
+- Create unique meta descriptions for each page
+- Include relevant keywords
+- Make titles descriptive and compelling
+
+## Expected Behavior
+
+### Filters:
+- ✅ Category pages have filter options
+- ✅ Users can filter b
+... (truncated)
+
+
+================================================================================
+Issue #33: Resources Page - Multiple Broken Anchor Links in Sidebar Navigation
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: bug, team-developer, navigation
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/33
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Resources Page - Multiple Broken Anchor Links in Sidebar Navigation
+
+## Summary
+
+The Resources page (`/resources/`) has multiple navigation links in the sidebar that point to anchor links (`#`) instead of actual pages. These links appear clickable but don't navigate anywhere.
+
+## Problem Description
+
+### Broken Anchor Links:
+On the Resources page sidebar, the following links all point to `#` (anchor links):
+- **Protection & Masking** → `#`
+- **SS Joining, Sealing & Repair** → `#`
+- **Printing, Display & Graphics** → `#`
+- **Flooring, Exhibition & Staging** → `#`
+- **Electrical** → `#`
+- **Construction & Thermal Insulation** → `#`
+- **Packaging & Strapping** → `#`
+- **DS Joining, Splicing & Laminating** → `#`
+
+### Impact:
+- **User Experience:** Users click links expecting navigation, but nothing happens
+- **Confusion:** Links appear functional but are non-functional
+- **Navigation Failure:** Users cannot access these application categories from the Resources page
+- **Professional Appearance:** Broken links make the site look incomplete
+
+## Expected Behavior
+
+These links should either:
+1. **Link to actual pages** (e.g., `/product-tag/protection-and-masking-tapes/`)
+2. **Be removed** if they're not meant to be functional
+3. **Link to appropriate content** if they're meant to filter resources by application
+
+## Location
+
+- **Page:** https://yrya6ftzmg.wpdns.site/resources/
+- **Section:** Left sidebar navigation
+- **Element:** "TAPES BY APPLICATION" navigation list
+
+## Tasks
+
+- [ ] Identify intended destination for each broken link
+- [ ] Update all `#` anchor links to point to correct pages:
+  - [ ] Protection & Masking → `/product-tag/protection-and-masking-tapes/`
+  - [ ] SS Joining, Sealing & Repair → `/product-tag/single-sided-joining-sealing-repair-tapes/`
+  - [ ] Printing, Display & Graphics → `/product-tag/printing-display-graphics-tapes/`
+  - [ ] Flooring, Exhibition & Staging → `/product-tag/flooring-exhibi
+... (truncated)
+
+
+================================================================================
+Issue #34: Accessibility - Missing Main ARIA Landmark
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: bug, team-developer, ui/ux
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/34
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Accessibility - Missing Main ARIA Landmark
+
+## Summary
+
+The homepage (and likely other pages) is missing the `<main>` ARIA landmark, which is required for proper screen reader navigation and WCAG 2.1 Level AA compliance.
+
+## Problem Description
+
+### Missing Main Landmark:
+- **No `<main>` element** or `role="main"` attribute found
+- Screen readers cannot identify the main content area
+- Users must navigate through all navigation/banner elements to reach content
+
+### Current Landmarks Found:
+- **Nav:** 4 navigation landmarks (excessive)
+- **Banner:** 13 banner/header landmarks (excessive)
+- **Contentinfo:** 1 footer landmark (correct)
+- **Complementary:** 0 aside landmarks
+- **Main:** 0 main landmarks ❌
+
+## Impact
+
+- **Accessibility:** Screen reader users cannot skip to main content
+- **WCAG Compliance:** Violates WCAG 2.1 Level AA (Success Criterion 1.3.1)
+- **User Experience:** Users must navigate through repetitive navigation elements
+- **SEO:** Search engines may not properly identify main content
+
+## Expected Behavior
+
+The page should have:
+- ✅ One `<main>` element wrapping the primary content
+- ✅ Proper landmark structure:
+  - One `<header>` or `role="banner"`
+  - One `<nav>` or `role="navigation"` (or multiple if distinct)
+  - One `<main>` or `role="main"`
+  - One `<footer>` or `role="contentinfo"`
+  - Optional `<aside>` or `role="complementary"` for sidebars
+
+## Tasks
+
+- [ ] Add `<main>` element wrapping primary content area
+- [ ] Verify only one main landmark per page
+- [ ] Review and consolidate excessive navigation/banner landmarks
+- [ ] Test with screen reader (NVDA/VoiceOver)
+- [ ] Verify skip links work correctly
+- [ ] Check all pages for main landmark
+- [ ] Validate with WAVE or axe DevTools
+
+## Priority
+
+**HIGH (P1)** - Accessibility compliance issue. Missing main landmark prevents screen reader users from efficiently navigating the page.
+
+## Related Issues
+
+- **Issue #31:** Accessibility
+... (truncated)
+
+
+================================================================================
+Issue #36: Contact Form - Unlabeled Inputs and Accessibility Issues
+================================================================================
+Priority: P1
+Status: OPEN
+Labels: bug, team-developer, ui/ux
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/36
+
+Description:
+--------------------------------------------------------------------------------
+# 🐛 Issue: Contact Form - Unlabeled Inputs and Accessibility Issues
+
+## Summary
+
+The contact form on `/contact-us/` has multiple accessibility issues: form inputs lack proper labels, and the form structure may not be fully accessible to screen readers.
+
+## Problem Description
+
+### Contact Form Analysis:
+- **Location:** https://yrya6ftzmg.wpdns.site/contact-us/
+- **Form Method:** POST
+- **Form Action:** `/contact-us/#wpcf7-f17-p1613-o1`
+
+### Accessibility Issues Found:
+
+**Unlabeled Inputs:**
+- **Name field** (`text-502`): No `id`, no `label[for]`, no `aria-label`, no `placeholder`
+- **Email field** (`email-620`): No `id`, no `label[for]`, no `aria-label`, no `placeholder`
+- **Subject field** (`text-56`): No `id`, no `label[for]`, no `aria-label`, no `placeholder`
+- **Message field** (`textarea-454`): No `id`, no `label[for]`, no `aria-label`, no `placeholder`
+
+**Visual Labels Present:**
+- The form has visual text labels ("Name *", "Email *", "Subject *", "Your Message *")
+- However, these are not properly associated with the input fields using `<label>` elements
+
+### Impact:
+- **Screen Readers:** Cannot identify what each input field is for
+- **WCAG Compliance:** Violates WCAG 2.1 Level A (Success Criterion 1.3.1, 4.1.2)
+- **Form Validation:** Screen readers cannot announce validation errors properly
+- **User Experience:** Users relying on assistive technology cannot complete the form
+
+## Expected Behavior
+
+All form inputs should have:
+- ✅ Proper `<label>` elements with `for` attribute matching input `id`
+- ✅ OR `aria-label` attribute
+- ✅ OR `aria-labelledby` pointing to descriptive text
+- ✅ Proper error announcements for validation
+- ✅ Success message announcements
+
+## Tasks
+
+- [ ] Add unique `id` attributes to all form inputs
+- [ ] Create `<label>` elements with `for` attributes matching input `id`s
+- [ ] Ensure all required fields are marked with `required` attribute and `aria-required="true"`
+- [ ] Add proper error mes
+... (truncated)
+
+
+================================================================================
+Issue #19: Sorting Menu Fields - What Determines These Fields?
+================================================================================
+Priority: P2
+Status: OPEN
+Labels: question, team-developer, ui/ux
+Assignees: Unassigned
+Created: 2025-11-14
+Updated: 2025-11-14
+URL: https://github.com/Tenacioustapes/https-yrya6ftzmg.wpdns.site-/issues/19
+
+Description:
+--------------------------------------------------------------------------------
+## Issue: Sorting Menu Fields - What Determines These Fields?
+
+**Area:** Sorting menu
+
+**Concern:** 
+What determines these fields?
+
+**Details:**
+- Need clarification on what determines the sorting menu field options
+- Understanding the logic behind available sorting options
+- May need to adjust or configure sorting fields based on requirements
+
+**Questions:**
+- What data source determines the sorting fields?
+- Are these fields configurable?
+- Should certain fields be added or removed?
+
